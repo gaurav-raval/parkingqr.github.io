@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parking Directions</title>
+    <style>
+      /* Set up the styles for the page */
+      body {
+        font-family: sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .parking-lot {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin: 0 auto;
+        background-color: lightgray;
+        border: 1px solid gray;
+      }
+
+      .parking-space {
+        position: absolute;
+        width: 100px;
+        height: 150px;
+        background-color: white;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 150px;
+        font-size: 1.5rem;
+      }
+
+      .parking-space.parking-space-1 {
+        top: 30px;
+        left: 30px;
+      }
+
+      .parking-space.parking-space-2 {
+        top: 30px;
+        right: 30px;
+      }
+
+      .parking-space.parking-space-3 {
+        bottom: 30px;
+        left: 30px;
+      }
+
+      .parking-space.parking-space-4 {
+        bottom: 30px;
+        right: 30px;
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        transition: transform 1s;
+      }
+
+      .arrow.arrow-right {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .arrow.arrow-left {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Parking Directions</h1>
+    <p>Please follow the arrow to your parking space.</p>
+    <div class="parking-lot">
+      <div class="parking-space parking-space-1">1</div>
+      <div class="parking-space parking-space-2">2</div>
+      <div class="parking-space parking-space-3">3</div>
+      <div class="parking-space parking-space-4">4</div>
+      <div class="arrow"></div>
+    </div>
+    <script>
+      // Get a random parking space number
+      const parkingSpace = Math.floor(Math.random() * 4) + 1;
+
+      // Get the element for the random parking space
+      const parkingSpaceElement = document.querySelector(`.parking-space-${parkingSpace}`);
+
+      // Set the arrow direction based on the location of the parking space
+      const arrowElement = document.querySelector('.arrow');
+      if (parkingSpace === 1 || parkingSpace === 2) {
+        arrowElement.classList.add('arrow-right');
+      } else {
+        arrowElement.classList.add('arrow-left');
+      }
+
+      // Calculate the distance from the arrow to the parking space element
+      const distance = Math.sqrt(Math.pow(parkingSpaceElement.offsetLeft - arrowElement.offsetLeft, 2) + Math.pow(parkingSpaceElement.offsetTop - arrowElement.offsetTop, 2));
+
+      // Set the transition duration based on the distance
+     
